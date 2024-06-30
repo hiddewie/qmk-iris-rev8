@@ -36,12 +36,24 @@ enum custom_keycodes {
 #define WRD_L LCTL(KC_LEFT) // Word left
 #define WRD_R LCTL(KC_RGHT) // Word right
 #define TD_ALT TD(_TD_RALT)
+#define LP_EQL LT(0, KC_EQL)
+#define LP_MINS LT(0, KC_MINS)
+#define LP_LPRN LT(0, KC_LPRN)
+#define LP_LBRC LT(0, KC_LBRC)
+#define LP_RBRC LT(0, KC_RBRC)
+#define LP_RPRN LT(0, KC_RPRN)
+#define LP_LCBR LT(0, KC_F13) // surrogate, same basic keycode as bracket
+#define LP_RCBR LT(0, KC_F14) // surrogate, same basic keycode as bracket
+#define LP_UNDS LT(0, KC_F15) // surrogate, same basic keycode as minus
+#define LP_PLUS LT(0, KC_F16) // surrogate, same basic keycode as equals
+
+// TODO KC_BACKSLASH
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
+     KC_ESC,  LP_UNDS, LP_LCBR, LP_LPRN, LP_LBRC, LP_EQL,                             LP_MINS, LP_RBRC, LP_RPRN, LP_RCBR, LP_PLUS, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -57,11 +69,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, KC_PLUS, KC_LCBR, KC_RCBR, _______,                            _______, KC_HOME, KC_UP,   KC_END,  _______, _______,
+     _______, _______, _______, KC_LCBR, KC_RCBR, _______,                            _______, KC_HOME, KC_UP,   KC_END,  _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, KC_EQL,  KC_LPRN, KC_RPRN, KC_PGUP,                            _______, WRD_L,   KC_DOWN, WRD_R,   _______, _______,
+     _______, _______, _______, KC_LPRN, KC_RPRN, KC_PGUP,                            _______, WRD_L,   KC_DOWN, WRD_R,   _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_UNDS, KC_MINS, KC_LBRC, KC_RBRC, KC_PGDN, _______,          KC_PSCR, _______, KC_LEFT, _______, KC_RGHT, _______, _______,
+     _______, _______, _______, KC_LBRC, KC_RBRC, KC_PGDN, _______,          KC_PSCR, _______, KC_LEFT, _______, KC_RGHT, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -115,35 +127,64 @@ void leader_end_user() {
     if (leader_sequence_one_key(KC_DEL)) { tap_code16(KC_F11); }
     if (leader_sequence_one_key(KC_ESC)) { tap_code16(KC_F12); }
 
-   //  if (leader_sequence_one_key(KC_F)) {
-   //      // Leader, f => Types the below string
-   //      SEND_STRING("QMK is awesome.");
-   //  } else if (leader_sequence_two_keys(KC_D, KC_D)) {
-   //      // Leader, d, d => Ctrl+A, Ctrl+C
-   //      SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-   //  } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
-   //      // Leader, d, d, s => Types the below string
-   //      SEND_STRING("https://start.duckduckgo.com\n");
-   //  } else if (leader_sequence_two_keys(KC_A, KC_S)) {
-   //      // Leader, a, s => GUI+S
-   //      tap_code16(LGUI(KC_S));
-   //  }
-
     rgblight_set_layer_state(5, false);
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case MMLEAD:
-            if (record->tap.count && record->event.pressed) {
-                leader_start();
+// From https://getreuer.info/posts/keyboards/triggers/index.html#tap-vs.-long-press
+// Helper for implementing tap vs. long-press keys. Given a tap-hold
+// key event, replaces the hold function with `long_press_keycode`.
+static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t tap_keycode, uint16_t shift_tap_keycode, uint16_t long_press_keycode) {
+  if (record->tap.count) {
+    // Key is being tapped
+    if (record->event.pressed) {
+      if (get_mods() & MOD_MASK_SHIFT) {
+        tap_code16(shift_tap_keycode);
+      } else {
+        tap_code16(tap_keycode);
+      }
 
-                // ignore further processing of key
-                return false;
-            }
-            break;
+      return false;
+    } else {
+      return true;
     }
-    return true;
+  } else {
+    // Key is being held
+    if (record->event.pressed) {
+      tap_code16(long_press_keycode);
+    }
+
+    return false;
+  }
+}
+
+static bool start_leader_on_tap(keyrecord_t* record) {
+  if (record->tap.count && record->event.pressed) {
+    leader_start();
+
+    // ignore further processing of key
+    return false;
+  }
+
+  // Continue default handling
+  return true;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  switch (keycode) {
+    case LP_UNDS: return process_tap_or_long_press_key(record, KC_UNDS, S(KC_1), KC_1);
+    case LP_LCBR: return process_tap_or_long_press_key(record, KC_LCBR, S(KC_2), KC_2);
+    case LP_LPRN: return process_tap_or_long_press_key(record, KC_LPRN, S(KC_3), KC_3);
+    case LP_LBRC: return process_tap_or_long_press_key(record, KC_LBRC, S(KC_4), KC_4);
+    case LP_EQL: return process_tap_or_long_press_key(record, KC_EQL, S(KC_5), KC_5);
+    case LP_MINS: return process_tap_or_long_press_key(record, KC_MINS, S(KC_6), KC_6);
+    case LP_RBRC: return process_tap_or_long_press_key(record, KC_RBRC, S(KC_7), KC_7);
+    case LP_RPRN: return process_tap_or_long_press_key(record, KC_RPRN, S(KC_8), KC_8);
+    case LP_RCBR: return process_tap_or_long_press_key(record, KC_RCBR, S(KC_9), KC_9);
+    case LP_PLUS: return process_tap_or_long_press_key(record, KC_PLUS, S(KC_0), KC_0);
+    case MMLEAD: return start_leader_on_tap(record);
+  }
+
+  return true;
 }
 
 
