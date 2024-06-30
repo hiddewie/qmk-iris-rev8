@@ -214,7 +214,7 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
-        case KC_QUOT: // Added, for colemak ' -> o transformation
+        case KC_SCLN: // Added, for colemak ; -> o transformation
             return true;
 
         default:
