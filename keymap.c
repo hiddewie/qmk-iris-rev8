@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_ESC,  LP_UNDS, LP_LCBR, LP_LPRN, LP_LBRC, LP_EQL,                             LP_MINS, LP_RBRC, LP_RPRN, LP_RCBR, LP_PLUS, KC_DEL,
+     KC_ESC,  LP_UNDS, LP_LBRC, LP_LPRN, LP_LCBR, LP_EQL,                             LP_MINS, LP_RCBR, LP_RPRN, LP_RBRC, LP_PLUS, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
