@@ -114,16 +114,16 @@ void leader_start_user() {
 }
 
 void leader_end_user() {
-    if (leader_sequence_one_key(KC_1)) { tap_code16(KC_F1); }
-    if (leader_sequence_one_key(KC_2)) { tap_code16(KC_F2); }
-    if (leader_sequence_one_key(KC_3)) { tap_code16(KC_F3); }
-    if (leader_sequence_one_key(KC_4)) { tap_code16(KC_F4); }
-    if (leader_sequence_one_key(KC_5)) { tap_code16(KC_F5); }
-    if (leader_sequence_one_key(KC_6)) { tap_code16(KC_F6); }
-    if (leader_sequence_one_key(KC_7)) { tap_code16(KC_F7); }
-    if (leader_sequence_one_key(KC_8)) { tap_code16(KC_F8); }
-    if (leader_sequence_one_key(KC_9)) { tap_code16(KC_F9); }
-    if (leader_sequence_one_key(KC_0)) { tap_code16(KC_F10); }
+    if (leader_sequence_one_key(KC_F15)) { tap_code16(KC_F1); }
+    if (leader_sequence_one_key(KC_LBRC)) { tap_code16(KC_F2); }
+    if (leader_sequence_one_key(KC_LPRN)) { tap_code16(KC_F3); }
+    if (leader_sequence_one_key(KC_F13)) { tap_code16(KC_F4); }
+    if (leader_sequence_one_key(KC_EQL)) { tap_code16(KC_F5); }
+    if (leader_sequence_one_key(KC_MINS)) { tap_code16(KC_F6); }
+    if (leader_sequence_one_key(KC_F14)) { tap_code16(KC_F7); }
+    if (leader_sequence_one_key(KC_RPRN)) { tap_code16(KC_F8); }
+    if (leader_sequence_one_key(KC_RBRC)) { tap_code16(KC_F9); }
+    if (leader_sequence_one_key(KC_F16)) { tap_code16(KC_F10); }
     if (leader_sequence_one_key(KC_DEL)) { tap_code16(KC_F11); }
     if (leader_sequence_one_key(KC_ESC)) { tap_code16(KC_F12); }
 
@@ -133,12 +133,19 @@ void leader_end_user() {
 // From https://getreuer.info/posts/keyboards/triggers/index.html#tap-vs.-long-press
 // Helper for implementing tap vs. long-press keys. Given a tap-hold
 // key event, replaces the hold function with `long_press_keycode`.
-static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t tap_keycode, uint16_t shift_tap_keycode, uint16_t long_press_keycode) {
+static bool process_tap_or_long_press_key(
+  keyrecord_t* record,
+  uint16_t tap_keycode,
+  uint16_t leader_tap_keycode,
+  uint16_t long_press_keycode
+) {
   if (record->tap.count) {
     // Key is being tapped
     if (record->event.pressed) {
-      if (get_mods() & MOD_MASK_SHIFT) {
-        tap_code16(shift_tap_keycode);
+      if (leader_sequence_active()) {
+        tap_code16(leader_tap_keycode);
+      } else if (get_mods() & MOD_MASK_SHIFT) {
+        tap_code16(S(long_press_keycode));
       } else {
         tap_code16(tap_keycode);
       }
@@ -171,16 +178,16 @@ static bool start_leader_on_tap(keyrecord_t* record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case LP_UNDS: return process_tap_or_long_press_key(record, KC_UNDS, S(KC_1), KC_1);
-    case LP_LCBR: return process_tap_or_long_press_key(record, KC_LCBR, S(KC_2), KC_2);
-    case LP_LPRN: return process_tap_or_long_press_key(record, KC_LPRN, S(KC_3), KC_3);
-    case LP_LBRC: return process_tap_or_long_press_key(record, KC_LBRC, S(KC_4), KC_4);
-    case LP_EQL: return process_tap_or_long_press_key(record, KC_EQL, S(KC_5), KC_5);
-    case LP_MINS: return process_tap_or_long_press_key(record, KC_MINS, S(KC_6), KC_6);
-    case LP_RBRC: return process_tap_or_long_press_key(record, KC_RBRC, S(KC_7), KC_7);
-    case LP_RPRN: return process_tap_or_long_press_key(record, KC_RPRN, S(KC_8), KC_8);
-    case LP_RCBR: return process_tap_or_long_press_key(record, KC_RCBR, S(KC_9), KC_9);
-    case LP_PLUS: return process_tap_or_long_press_key(record, KC_PLUS, S(KC_0), KC_0);
+    case LP_UNDS: return process_tap_or_long_press_key(record, KC_UNDS, KC_F1, KC_1);
+    case LP_LBRC: return process_tap_or_long_press_key(record, KC_LBRC, KC_F2, KC_2);
+    case LP_LPRN: return process_tap_or_long_press_key(record, KC_LPRN, KC_F3, KC_3);
+    case LP_LCBR: return process_tap_or_long_press_key(record, KC_LCBR, KC_F4, KC_4);
+    case LP_EQL: return process_tap_or_long_press_key(record, KC_EQL, KC_F5, KC_5);
+    case LP_MINS: return process_tap_or_long_press_key(record, KC_MINS, KC_F6, KC_6);
+    case LP_RCBR: return process_tap_or_long_press_key(record, KC_RCBR, KC_F7, KC_7);
+    case LP_RPRN: return process_tap_or_long_press_key(record, KC_RPRN, KC_F8, KC_8);
+    case LP_RBRC: return process_tap_or_long_press_key(record, KC_RBRC, KC_F9, KC_9);
+    case LP_PLUS: return process_tap_or_long_press_key(record, KC_PLUS, KC_F10, KC_0);
     case MMLEAD: return start_leader_on_tap(record);
   }
 
