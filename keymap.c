@@ -35,6 +35,12 @@ enum custom_keycodes {
 #define ANT_TAB S(KC_TAB) // Anti-tab
 #define WRD_L LCTL(KC_LEFT) // Word left
 #define WRD_R LCTL(KC_RGHT) // Word right
+#define S_WRD_L S(LCTL(KC_LEFT)) // Select word left
+#define S_WRD_R S(LCTL(KC_RGHT)) // Select word right
+#define S_HOME S(KC_HOME) // Select until begin of line
+#define S_END S(KC_END) // Select until end of line
+#define S_LEFT S(KC_LEFT) // Select character left
+#define S_RIGHT S(KC_RGHT) // Select character right
 #define TD_ALT TD(_TD_RALT)
 #define LP_EQL LT(0, KC_EQL)
 #define LP_MINS LT(0, KC_MINS)
@@ -69,11 +75,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, KC_HOME, KC_UP,   KC_END,  _______, _______,
+     _______, _______, _______, _______, _______, _______,                            S_HOME,  KC_HOME, KC_UP,   KC_END,  S_END,   _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, KC_PGUP,                            _______, WRD_L,   KC_DOWN, WRD_R,   _______, _______,
+     _______, _______, _______, _______, _______, KC_PGUP,                            S_WRD_L, WRD_L,   KC_DOWN, WRD_R,   S_WRD_R, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, KC_PGDN, _______,          KC_PSCR, _______, KC_LEFT, _______, KC_RGHT, _______, _______,
+     _______, _______, _______, _______, _______, KC_PGDN, _______,          KC_PSCR, S_LEFT,  KC_LEFT, _______, KC_RGHT, S_RIGHT, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
