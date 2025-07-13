@@ -5,6 +5,7 @@
 #define SPLIT_LAYER_STATE_ENABLE
 
 #define PERMISSIVE_HOLD
+#define QUICK_TAP_TERM 0
 
 #define TAPPING_TERM 160
 

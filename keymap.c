@@ -53,6 +53,16 @@ enum custom_keycodes {
 #define LP_UNDS LT(0, KC_F15) // surrogate, same basic keycode as minus
 #define LP_PLUS LT(0, KC_F16) // surrogate, same basic keycode as equals
 #define LP_SLSH LT(0, KC_SLSH)
+// Home row mod, left
+#define HR_A LGUI_T(KC_A)
+#define HR_S LALT_T(KC_S)
+#define HR_D LSFT_T(KC_D)
+#define HR_F LCTL_T(KC_F)
+// Home row mod, right
+#define HR_J RCTL_T(KC_J)
+#define HR_K RSFT_T(KC_K)
+#define HR_L LALT_T(KC_L)
+#define HR_SCLN RGUI_T(KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -62,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     SHLEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+     SH_ENT,  HR_A,    HR_S,    HR_D,    HR_F,    KC_G,                               KC_H,    HR_J,    HR_K,    HR_L,    HR_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      ANT_TAB, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LGUI,          CW_TOGG, KC_N,    KC_M,    KC_COMM, KC_DOT,  LP_SLSH, KC_GRV,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
