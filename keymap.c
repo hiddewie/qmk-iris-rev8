@@ -30,7 +30,6 @@ enum custom_keycodes {
 };
 
 #define SH_ENT SFT_T(KC_ENT) // hold: shift, tap: enter
-#define SHLEAD SFT_T(QK_LEAD) // hold: shift, tap: leader key
 #define MMLEAD LT(_MOUSE_MEDIA, QK_LEAD) // tap: leader key, hold: Mouse / media layer
 #define ANT_TAB S(KC_TAB) // Anti-tab
 #define WRD_L LCTL(KC_LEFT) // Word left
@@ -53,16 +52,6 @@ enum custom_keycodes {
 #define LP_UNDS LT(0, KC_F15) // surrogate, same basic keycode as minus
 #define LP_PLUS LT(0, KC_F16) // surrogate, same basic keycode as equals
 #define LP_SLSH LT(0, KC_SLSH)
-// Home row mod, left
-#define HR_A LGUI_T(KC_A)
-#define HR_S LALT_T(KC_S)
-#define HR_D LSFT_T(KC_D)
-#define HR_F LCTL_T(KC_F)
-// Home row mod, right
-#define HR_J RCTL_T(KC_J)
-#define HR_K RSFT_T(KC_K)
-#define HR_L LALT_T(KC_L)
-#define HR_SCLN RGUI_T(KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -72,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     SH_ENT,  HR_A,    HR_S,    HR_D,    HR_F,    KC_G,                               KC_H,    HR_J,    HR_K,    HR_L,    HR_SCLN, KC_QUOT,
+     SH_ENT,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      ANT_TAB, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LGUI,          CW_TOGG, KC_N,    KC_M,    KC_COMM, KC_DOT,  LP_SLSH, KC_GRV,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -98,11 +87,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_SLEP, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, BOOT_K1,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, DT_PRNT, KC_BTN2, KC_MS_U, KC_BTN1, _______,                            _______, KC_MPRV, KC_VOLU, KC_MNXT, _______, BOOT_K2,
+     _______, _______, KC_BTN2, KC_MS_U, KC_BTN1, _______,                            _______, KC_MPRV, KC_VOLU, KC_MNXT, _______, BOOT_K2,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     UG_VALU, DT_UP  , KC_MS_L, KC_MS_D, KC_MS_R, KC_PGUP,                            _______, KC_MPLY, KC_VOLD, KC_MPLY, _______, DT_UP,
+     UG_VALU, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_PGUP,                            _______, KC_MPLY, KC_VOLD, KC_MPLY, _______, DT_UP,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     UG_TOGG, DT_DOWN, _______, _______, _______, KC_PGDN, _______,          _______, _______, _______, KC_MUTE, _______, DT_PRNT, DT_DOWN,
+     UG_TOGG, _______, _______, _______, _______, KC_PGDN, _______,          _______, _______, _______, KC_MUTE, _______, DT_PRNT, DT_DOWN,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
