@@ -115,7 +115,18 @@ combo_t key_combos[] = {
 // ------------------------
 
 void leader_start_user() {
-   rgblight_set_layer_state(5, true);
+   // rgblight_set_layer_state(5, true);
+
+//    rgblight_sethsv_at(HSV_GREEN, 10);
+//    rgblight_sethsv_at(HSV_GREEN, 12);
+//    rgblight_sethsv_at(HSV_WHITE, 46);
+//    rgblight_sethsv_at(HSV_WHITE, 44);
+
+//    rgblight_set();
+
+   // rgb_matrix_set_color(29, HSV_WHITE);
+   // rgb_matrix_set_color(29 + 34, HSV_WHITE);
+//    rgb_matrix_set_color()
 }
 
 void leader_end_user() {
@@ -123,7 +134,17 @@ void leader_end_user() {
   if (leader_sequence_one_key(KC_DEL)) { tap_code16(KC_F11); }
   if (leader_sequence_one_key(KC_ESC)) { tap_code16(KC_F12); }
 
-  rgblight_set_layer_state(5, false);
+  // rgblight_set_layer_state(5, false);
+
+//    rgblight_sethsv_at(HSV_RED, 10);
+//    rgblight_sethsv_at(HSV_RED, 12);
+//    rgblight_sethsv_at(HSV_BLACK, 46);
+//    rgblight_sethsv_at(HSV_BLACK, 44);
+
+//    rgblight_set();
+
+//    rgb_matrix_set_color(29, HSV_BLACK);
+//    rgb_matrix_set_color(29 + 34, HSV_BLACK);
 }
 
 // From https://getreuer.info/posts/keyboards/triggers/index.html#tap-vs.-long-press
@@ -198,7 +219,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 // --------------------------
 
 void caps_word_set_user(bool active) {
-    rgblight_set_layer_state(4, active);
+    // rgblight_set_layer_state(4, active);
 }
 
 bool caps_word_press_user(uint16_t keycode) {
@@ -246,12 +267,12 @@ LED index mapping:
           (24)              (27)              (31)                                    (  )              (  )              (  )
 
 */
-
+/*
 const rgblight_segment_t PROGMEM BASE_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
     // left side
-    {0, 34, HSV_BLACK}
+    {0, 34, HSV_BLACK},
     // right side
-   //  {0, 34, HSV_BLACK}
+    {0, 34, HSV_BLACK}
 );
 
 const rgblight_segment_t PROGMEM QWERTY_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -261,14 +282,14 @@ const rgblight_segment_t PROGMEM QWERTY_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
     {7, 1, HSV_PURPLE}, // underglow
     {24, 1, HSV_PURPLE}, // underglow
     {27, 1, HSV_PURPLE}, // underglow
-    {31, 1, HSV_PURPLE}  // underglow
+    {31, 1, HSV_PURPLE},  // underglow
     // right side
-   //  {1+34, 1, HSV_PURPLE}, // underglow
-   //  {4+34, 1, HSV_PURPLE}, // underglow
-   //  {7+34, 1, HSV_PURPLE}, // underglow
-   //  {24+34, 1, HSV_PURPLE}, // underglow
-   //  {27+34, 1, HSV_PURPLE}, // underglow
-   //  {31+34, 1, HSV_PURPLE}  // underglow
+     {1+34, 1, HSV_PURPLE}, // underglow
+     {4+34, 1, HSV_PURPLE}, // underglow
+     {7+34, 1, HSV_PURPLE}, // underglow
+     {24+34, 1, HSV_PURPLE}, // underglow
+     {27+34, 1, HSV_PURPLE}, // underglow
+     {31+34, 1, HSV_PURPLE}  // underglow
 );
 
 const rgblight_segment_t PROGMEM SYMBOLS_NAVIGATION_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -278,39 +299,46 @@ const rgblight_segment_t PROGMEM SYMBOLS_NAVIGATION_LIGHT_LAYER[] = RGBLIGHT_LAY
     {7, 1, HSV_RED}, // underglow
     {24, 1, HSV_RED}, // underglow
     {27, 1, HSV_RED}, // underglow
-    {31, 1, HSV_RED}  // underglow
+    {31, 1, HSV_RED}, // underglow
    //  // right side
-   //  {1+34, 1, HSV_RED}, // underglow
-   //  {4+34, 1, HSV_RED}, // underglow
-   //  {7+34, 1, HSV_RED}, // underglow
-   //  {24+34, 1, HSV_RED}, // underglow
-   //  {27+34, 1, HSV_RED}, // underglow
-   //  {31+34, 1, HSV_RED}  // underglow
+     {1+34, 1, HSV_RED}, // underglow
+     {4+34, 1, HSV_RED}, // underglow
+   {7+34, 1, HSV_RED}, // underglow
+     {24+34, 1, HSV_RED}, // underglow
+   {27+34, 1, HSV_RED}, // underglow
+     {31+34, 1, HSV_RED}  // underglow
 );
 
 const rgblight_segment_t PROGMEM MOUSE_MEDIA_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
     // left side
+    {0, 1, HSV_WHITE},
     {1, 1, HSV_GOLD}, // underglow
     {4, 1, HSV_GOLD}, // underglow
     {7, 1, HSV_GOLD}, // underglow
     {24, 1, HSV_GOLD}, // underglow
     {27, 1, HSV_GOLD}, // underglow
-    {31, 1, HSV_GOLD}  // underglow
+    {31, 1, HSV_GOLD} , // underglow
+    {17, 1, HSV_RED},
+    {19, 1, HSV_RED},
     // right side
-   //  {1+34, 1, HSV_GOLD}, // underglow
-   //  {4+34, 1, HSV_GOLD}, // underglow
-   //  {7+34, 1, HSV_GOLD}, // underglow
-   //  {24+34, 1, HSV_GOLD}, // underglow
-   //  {27+34, 1, HSV_GOLD}, // underglow
-   //  {31+34, 1, HSV_GOLD}  // underglow
+   {1+34, 1, HSV_GOLD}, // underglow
+     {4+34, 1, HSV_GOLD}, // underglow
+    {7+34, 1, HSV_GOLD}, // underglow
+    {24+34, 1, HSV_GOLD}, // underglow
+   {27+34, 1, HSV_GOLD}, // underglow
+     {31+34, 1, HSV_GOLD},  // underglow
+    {51, 1, HSV_GREEN},
+    {53, 1, HSV_GREEN}
 );
 
 const rgblight_segment_t PROGMEM CAPS_WORD_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
-   //  {0, 1, HSV_WHITE},
-   //  {32, 2, HSV_GOLD},
-    {31, 1, HSV_GOLD} // underglow
-//    {31+34, 1, HSV_GOLD}, // underglow
-//     {32+34, 2, HSV_GOLD}
+    // {0, 1, HSV_WHITE},
+   // {32, 1, HSV_GOLD},
+    {31, 1, HSV_GOLD}, // underglow
+   {31+34, 1, HSV_GOLD} // underglow
+//     {32+34, 1, HSV_GOLD}
+   // {66, 1, HSV_WHITE}, // underglow
+   // {67, 1, HSV_WHITE} // underglow
 );
 
 const rgblight_segment_t PROGMEM LEADER_LIGHT_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -324,23 +352,24 @@ const rgblight_segment_t* const PROGMEM LIGHT_LAYERS[] = RGBLIGHT_LAYERS_LIST(
     MOUSE_MEDIA_LIGHT_LAYER,
     CAPS_WORD_LIGHT_LAYER,
     LEADER_LIGHT_LAYER
-);
+);*/
 
 void keyboard_post_init_user(void) {
-    rgblight_layers = LIGHT_LAYERS;
+    //rgblight_layers = LIGHT_LAYERS;
 }
 
 layer_state_t default_layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(0, true);
-    rgblight_set_layer_state(1, layer_state_cmp(state, _QWERTY));
+    //ht_set_layer_state(0, true);
+    //ht_set_layer_state(1, layer_state_cmp(state, _QWERTY));
 
     return state;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(2, layer_state_cmp(state, _SYMBOLS_NAVIGATION));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _MOUSE_MEDIA));
-    rgblight_set_layer_state(4, is_caps_word_on());
-    rgblight_set_layer_state(5, leader_sequence_active());
+    //rgblight_set_layer_state(2, layer_state_cmp(state, _SYMBOLS_NAVIGATION));
+    //rgblight_set_layer_state(3, layer_state_cmp(state, _MOUSE_MEDIA));
+    //rgblight_set_layer_state(4, is_caps_word_on());
+    //rgblight_set_layer_state(5, leader_sequence_active());
+
     return state;
 }
