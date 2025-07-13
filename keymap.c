@@ -29,8 +29,8 @@ enum custom_keycodes {
     BOOT_K2
 };
 
-#define SH_ENT SFT_T(KC_ENT) // tap: shift, hold: enter
-#define SHLEAD SFT_T(QK_LEAD) // tap: shift, hold: leader key
+#define SH_ENT SFT_T(KC_ENT) // hold: shift, tap: enter
+#define SHLEAD SFT_T(QK_LEAD) // hold: shift, tap: leader key
 #define MMLEAD LT(_MOUSE_MEDIA, QK_LEAD) // tap: leader key, hold: Mouse / media layer
 #define ANT_TAB S(KC_TAB) // Anti-tab
 #define WRD_L LCTL(KC_LEFT) // Word left
